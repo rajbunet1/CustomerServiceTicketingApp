@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="card">
+    <div class="card-header table-header">
+        <h4 class="text-center p-0 m-0">New Ticket</h4>
+    </div>
+    <div class="card-body">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-success" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

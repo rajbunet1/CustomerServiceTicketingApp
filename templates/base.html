@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/66e9589bdf.js"></script>
+    <title>
+        Customer Service Ticketing System
+    </title>
+
+</head>
+<body>
+<div class="header-nightsky">
+    <div class="hero">
+        <h1>Customer Service Ticketing System</h1>
+        {% if user.is_authenticated %}
+        <p><i class="fa-solid fa-user"></i> Hello, <b>{{user.username}}</b>! <br>
+            <i class="fa-solid fa-book"></i> {{user.role|title}}
+        </p>
+        <a class="btn btn-light" href="/"><i class="fa-solid fa-house"></i></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% for message in messages %}
+            <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                        <span aria-hidden="True">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</div>
+<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    $(document).on('click', '.confirm-delete', function () {
+        return confirm('Are you sure you want to delete this?');
+    })
+    $(document).on('click', '.confirm-logout', function () {
+        return confirm('Are you sure you want to log out?');
+    })
+</script>
+</body>
+<style>
+    .table-header {
+        color: white;
+        background-color: green;
+    }
+
+    .card {
+        width: 40%;
+    }
+
+    a {
+        color: green;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .header-nightsky {
+        color: white;
+        background: url("{% static 'background.jpg' %}") no-repeat;
+        padding-top: 20px;
+        padding-bottom: 5px;
+        background-size: 100% 100%;
+    }
+
+
+    .header-nightsky .hero {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .header-nightsky .hero h1 {
+        color: white;
+        font-weight: bold;
+        font-size: 50px;
+        margin-bottom: 5px;
+    }
+
+
+    .header-nightsky .hero p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 25px;
+        max-width: 660px;
+        font-weight: normal;
+        line-height: 1.5;
+        margin: auto;
+    }
+
+    .scrollable {
+        overflow-y: scroll;
+        max-height: 55vh;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    body {
+        padding-bottom: 20px;
+    }
+</style>
+
+</html>

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{{ form_errors }}
+<div class="scrollable">
+    <table class="table table-hover table-striped table-bordered text-center">
+        <thead>
+        <tr class="table-header">
+            <th class="text-center p-1" colspan="9"><h4>Existing Users</h4></th>
+        </tr>
+        <tr>
+            <th scope="col"> ID</th>
+            <th scope="col"> Email</th>
+            <th scope="col"> Username</th>
+            <th scope="col"> Role</th>
+            <th scope="col"> Tickets Opened</th>
+            <th scope="col"> Tickets Processed</th>
+            {% if user.role == 'ADMIN' %}
+
+            <th scope="col"> Actions</th>
+            {% endif %}
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for user_ in users %}
+        <tr>
+            <th scope="row">{{user_.id}}</th>
+            <td>{{user_.email}}</td>
+            <td>{{user_.username}}</td>
+            <td>{{user_.role}}</td>
+            <td>{{user_.tickets_opened.count}}</td>
+            <td>{{user_.tickets_processed.count}}</td>
+            {% if user.role == 'ADMIN' %}
+
+            <td>
+
+                <a class="btn btn-primary" data-toggle="tooltip" href="/edit_user/{{ user_.id }}" title="Edit"><i
+                        class="fa-solid fa-pen-to-square"></i></a>
+                <a class="btn btn-danger confirm-delete" data-toggle="tooltip" href="/delete_user/{{ user_.id }}"
+                   title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-around w-75">
+    <a class="btn btn-primary w-25" href="/home_tickets">Manage Tickets</a>
+    <a class="btn btn-warning w-25" href="/new_user">Create New User</a>
+    <a class="btn btn-danger w-25 confirm-logout " href="/logout">Log out</a>
+</div>
+{% endblock content %}
+

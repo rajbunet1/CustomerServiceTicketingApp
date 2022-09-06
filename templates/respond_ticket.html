@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container row">
+    <div class="col-6">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr class="table-header">
+                <th class="text-center" colspan="2"><h5>#{{ticket.id}} Ticket Information</h5></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr>
+                <th> title</th>
+                <td>{{ticket.title}}</td>
+            </tr>
+            <tr>
+
+                <th>description</th>
+                <td>{{ticket.description}}</td>
+            </tr>
+            <tr>
+
+                <th>date_created</th>
+                <td>{{ticket.date_created}}</td>
+            </tr>
+            <tr>
+
+                <th>Status</th>
+                <td>{{ticket.status}}</td>
+            </tr>
+            <tr>
+
+                <th>customer</th>
+                <td>{{ticket.customer}}</td>
+            </tr>
+            <tr>
+
+                <th>worker</th>
+                <td>{{ticket.worker}}</td>
+            </tr>
+            <tr>
+
+                <th>files</th>
+                <td>
+                    {% if ticket.files%}
+                    {{ticket.files}}<br>
+                    <a class="btn btn-success" href="/download_ticket_files/{{ticket.id}}">Download</a>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <form class="w-100" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% if user.role != 'CUSTOMER' %}
+            <button class="btn btn-success" type="submit">Respond</button>
+
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}
