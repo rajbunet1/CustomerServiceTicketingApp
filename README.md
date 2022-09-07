@@ -5,9 +5,9 @@ This web app is for customer service representatives to create customer service 
 
 Please note this web app has three different user roles:
 
-*Required Roles*
-Admin role: CRUD
-Regular role: CRU
-
-*Additional Role*
+*Required Roles* <br />
+Admin role: CRUD <br />
+Regular role: CRU <br />
+<br />
+*Additional Role*<br />
 Customer role: CR (only tickets assigned to them)
